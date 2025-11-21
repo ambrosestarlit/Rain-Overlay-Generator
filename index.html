@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rain Overlay Generator</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* 背景に落ちる雨のアニメーション（飾り用） */
+    .raindrops {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .raindrop {
+      position: absolute;
+      width: 2px;
+      height: 50px;
+      background: linear-gradient(transparent, rgba(180,210,255,0.8));
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px); }
+      100% { transform: translateY(100vh); }
+    }
+    /* 個別に遅延と位置を付与（10本くらいで十分） */
+    .raindrop:nth-child(1) { left: 10%; animation-duration: 0.8s; animation-delay: 0s; }
+    .raindrop:nth-child(2) { left: 20%; animation-duration: 0.9s; animation-delay: 0.2s; }
+    .raindrop:nth-child(3) { left: 30%; animation-duration: 0.7s; animation-delay: 0.4s; }
+    .raindrop:nth-child(4) { left: 40%; animation-duration: 1s; animation-delay: 0.1s; }
+    .raindrop:nth-child(5) { left: 50%; animation-duration: 0.75s; animation-delay: 0.6s; }
+    .raindrop:nth-child(6) { left: 60%; animation-duration: 0.85s; animation-delay: 0.3s; }
+    .raindrop:nth-child(7) { left: 70%; animation-duration: 0.95s; animation-delay: 0.5s; }
+    .raindrop:nth-child(8) { left: 80%; animation-duration: 0.7s; animation-delay: 0.7s; }
+    .raindrop:nth-child(9) { left: 90%; animation-duration: 0.9s; animation-delay: 0.15s; }
+    .raindrop:nth-child(10) { left: 15%; animation-duration: 1.1s; animation-delay: 0.45s; }
+  </style>
+</head>
+<body>
+
+  <!-- 背景に落ちる飾り雨 -->
+  <div class="snowflakes" aria-hidden="true">
+  <div class="raindrop">｜</div>
+  <div class="raindrop">・</div>
+  <div class="raindrop">｜</div>
+  <div class="raindrop">・</div>
+  <div class="raindrop">｜</div>
+  <div class="raindrop">｜</div>
+  <div class="raindrop">・</div>
+  <div class="raindrop">｜</div>
+  <div class="raindrop">・</div>
+  <div class="raindrop">｜</div>
+  <div class="raindrop">｜</div>
+  <div class="raindrop">・</div>
+</div>
+
+  <header>
+    <h1><span class="emoji-color-white">☂</span> Rain Overlay Generator</h1>
+    <p>完全シームレスな透過雨エフェクトを連番PNGで書き出せます</p>
+  </header>
+
+  <main>
+    <section class="preview">
+      <h2>プレビュー（黒背景は確認用）</h2>
+      <canvas id="previewCanvas" width="853" height="480"></canvas>
+      <div class="preview-controls">
+        <button id="playPreview">▶ 再生</button>
+        <button id="stopPreview" disabled>■ 停止</button>
+      </div>
+    </section>
+
+    <br/>
+
+    <section class="controls">
+      <label>ループ秒数:
+        <input type="number" id="loopSeconds" value="4" min="0.5" step="0.1" /> 秒
+      </label>
+
+      <label>FPS:
+        <select id="fpsSelect">
+          <option value="24">24</option>
+          <option value="30" selected>30</option>
+          <option value="60">60</option>
+        </select>
+      </label>
+
+      <label>雨量:
+        <input type="range" id="rainAmount" min="100" max="2500" value="900" step="50" />
+        <span id="rainAmountValue">900</span> 粒
+      </label>
+
+      <label>速度プリセット:
+        <select id="speedSelect">
+          <option value="70">しとしと雨</option>
+          <option value="100">普通の雨</option>
+          <option value="130" selected>強い雨</option>
+          <option value="170">土砂降り</option>
+          <option value="220">台風級</option>
+        </select>
+      </label>
+
+      <br/><br/>
+      <button id="startButton" style="font-size:1.2em;padding:12px 24px;">
+        <span class="emoji-color-white">☂</span> 雨オーバーレイ連番を書き出す (1920×1080 PNG)
+      </button>
+    </section>
+  </main>
+
+  <!-- JSZip -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
