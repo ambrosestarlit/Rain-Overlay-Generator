@@ -1,0 +1,26 @@
+{
+  "name": "Rain Overlay Generator",
+  "short_name": "Rain Gen",
+  "description": "完全シームレスな透過雨エフェクトを連番PNGで書き出せます",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0f4f8",
+  "theme_color": "#cce5ff",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["graphics", "utilities"],
+  "lang": "ja"
+}
